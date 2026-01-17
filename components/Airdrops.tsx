@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 // Данные для карточек (потом поменяешь на свои)
 const projects = [
   {
-    title: "Monad",
-    status: "Testnet",
+    title: "Gradient AI",
+    status: "Active Farming",
     potential: "$$$$",
-    description: "L1 блокчейн нового поколения с параллельным выполнением транзакций.",
-    color: "from-purple-500 to-indigo-500",
-    link: "#"
+    description: "Աշխարհի առաջին դեցենտրալիզացված AI միջավայրը։ Միացրու համակարգիչը, հավաքիր point-եր և ստացիր token-ներ։",
+    color: "from-orange-400 to-pink-600", // Яркий градиент под их стиль
+    link: "https://app.gradient.network/signup?code=5N0GTU" // Твоя рефка
   },
   {
     title: "LayerZero",

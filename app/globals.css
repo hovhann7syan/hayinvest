@@ -1,16 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-background: #0a0b0d;
+}
 
 @layer base {
   body {
-    @apply bg-[#0a0b0d] text-white antialiased;
+    background-color: var(--color-background);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     padding: 0;
   }
 }
 
-/* Принудительный стиль для кнопок, если Tailwind медлит */
-.btn-primary {
-  @apply px-8 py-4 bg-[#6366f1] text-white rounded-2xl font-bold;
+/* Твой стиль для кнопок */
+@utility btn-primary {
+  padding: 1rem 2rem;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 1rem;
+  font-weight: 700;
+  transition: background-color 0.2s;
+  display: inline-block;
+  text-align: center;
+}
+
+@utility btn-primary:hover {
+  background-color: var(--color-primary-hover);
 }

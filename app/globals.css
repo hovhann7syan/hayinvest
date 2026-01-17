@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* 1. Сканируем все файлы, чтобы Tailwind работал */
 @source "../**/*";
 
 @theme {

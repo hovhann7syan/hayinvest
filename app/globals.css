@@ -1,49 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source "../**/*";
-
-@theme {
-  --color-primary: #6366f1;
-  --color-primary-hover: #4f46e5;
-  --color-background: #0a0b0d;
-  --color-surface: #12141a; /* Чуть светлее для карточек */
-}
-
-/* 2. Гарантируем темную тему */
-html, body {
-  background-color: var(--color-background);
+body {
+  background: #0a0b0d;
   color: white;
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-geist-sans), sans-serif;
-}
-
-/* 3. ТА САМАЯ МАГИЯ (Кнопки с градиентом и свечением) */
-@utility btn-primary {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.75rem; /* Закругленные углы */
-  font-weight: 600;
-  color: white;
-  transition: all 0.3s ease;
-  
-  /* Градиент как у Coinbase/Web3 */
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  
-  /* Неоновое свечение */
-  box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.5);
-}
-
-@utility btn-primary:hover {
-  transform: translateY(-2px); /* Легкий подъем при наведении */
-  box-shadow: 0 8px 30px -4px rgba(99, 102, 241, 0.7);
-}
-
-/* 4. Стеклянный эффект для хедера (если нужен) */
-@utility glass {
-  background: rgba(10, 11, 13, 0.7);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }

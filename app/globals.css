@@ -1,10 +1,5 @@
-* {
-  background-color: red !important;
-}
-
 @import "tailwindcss";
 
-/* Тот самый агрессивный поиск классов, чтобы ничего не потерялось */
 @source "../**/*"; 
 
 @theme {
@@ -17,14 +12,9 @@
   body {
     background-color: var(--color-background);
     color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin: 0;
-    padding: 0;
   }
 }
 
-/* Возвращаем твои кастомные утилиты */
 @utility btn-primary {
   padding: 1rem 2rem;
   background-color: var(--color-primary);
@@ -34,8 +24,4 @@
   transition: background-color 0.2s;
   display: inline-block;
   text-align: center;
-}
-
-@utility btn-primary:hover {
-  background-color: var(--color-primary-hover);
 }

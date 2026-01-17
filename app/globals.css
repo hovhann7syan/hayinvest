@@ -1,3 +1,7 @@
+* {
+  background-color: red !important;
+}
+
 @import "tailwindcss";
 
 /* Тот самый агрессивный поиск классов, чтобы ничего не потерялось */

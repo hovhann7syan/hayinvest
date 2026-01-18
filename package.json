@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 0.0.0.0 -p 3000",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+  "dev": "next dev -H 0.0.0.0 -p 3000",
+  "build": "next build --no-lint",  
+  "start": "next start",
+  "lint": "eslint"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

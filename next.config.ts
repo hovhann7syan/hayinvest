@@ -2,13 +2,10 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
 
-// 👇 ПИШЕМ ': any', ЧТОБЫ УБРАТЬ ВСЕ КРАСНЫЕ ЛИНИИ
-const nextConfig: any = {
+const nextConfig = {
   typescript: {
+    // Игнорируем ошибки типов при сборке
     ignoreBuildErrors: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
@@ -20,4 +17,5 @@ const nextConfig: any = {
   },
 };
 
-export default withNextIntl(nextConfig);
+// 👇 ВОТ МАГИЯ: 'as any' убирает красную волнистую линию
+export default withNextIntl(nextConfig as any);

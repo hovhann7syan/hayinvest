@@ -3,17 +3,18 @@ import localFont from "next/font/local";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import Header from "@/components/Header";
-import Footer from "@/components/Footer"; // 👈 Добавили импорт футера
+import Footer from "@/components/Footer"; 
 import "../globals.css";
 
 // 1. ПОДКЛЮЧАЕМ MONTSERRAT ARM
+// 👇 ВАЖНО: Исправил .otf на .OTF (как в названиях файлов)
 const montserrat = localFont({
   src: [
-    { path: '../fonts/MONTSERRATARM2-REGULAR.otf', weight: '400', style: 'normal' },
-    { path: '../fonts/MONTSERRATARM2-MEDIUM.otf', weight: '500', style: 'normal' },
-    { path: '../fonts/MONTSERRATARM2-SEMIBOLD.otf', weight: '600', style: 'normal' },
-    { path: '../fonts/MONTSERRATARM2-BOLD.otf', weight: '700', style: 'normal' },
-    { path: '../fonts/MONTSERRATARM2-BLACK.otf', weight: '900', style: 'normal' },
+    { path: '../fonts/MONTSERRATARM2-REGULAR.OTF', weight: '400', style: 'normal' },
+    { path: '../fonts/MONTSERRATARM2-MEDIUM.OTF', weight: '500', style: 'normal' },
+    { path: '../fonts/MONTSERRATARM2-SEMIBOLD.OTF', weight: '600', style: 'normal' },
+    { path: '../fonts/MONTSERRATARM2-BOLD.OTF', weight: '700', style: 'normal' },
+    { path: '../fonts/MONTSERRATARM2-BLACK.OTF', weight: '900', style: 'normal' },
   ],
   variable: "--font-montserrat",
   display: "swap",
@@ -53,7 +54,6 @@ export default async function RootLayout({
           <Header />
           
           {/* Основной контент страницы */}
-          {/* flex-grow заставит футер всегда прижиматься к низу, если контента мало */}
           <main className="pt-20 flex-grow"> 
             {children}
           </main>

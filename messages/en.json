@@ -1,0 +1,46 @@
+{
+  "Header": {
+    "airdrops": "Airdrops",
+    "investments": "Fundraising",
+    "academy": "Academy",
+    "channel": "Channel",
+    "join": "Join Team"
+  },
+  "Hero": {
+    "welcome": "WELCOME TO",
+    "title": "HAYINVEST",
+    "subtitle": "Node Runners. Alpha Hunters. DeFi Natives. We find the signal in the noise.",
+    "channel": "ENTER CHANNEL",
+    "team": "JOIN CORE TEAM",
+    "badge": "ARMENIA NODE: ONLINE"
+  },
+  "Footer": {
+    "desc": "Decentralized collective. Focused on infrastructure, research, and early opportunities.",
+    "community": "NETWORK",
+    "contact": "UPLINK",
+    "support": "SYSTEM SUPPORT",
+    "support_desc": "OPERATIONAL HELP",
+    "collab": "PARTNERSHIP",
+    "collab_desc": "BUSINESS INQUIRIES",
+    "rights": "ALL SYSTEMS OPERATIONAL.",
+    "powered": "POWERED BY"
+  },
+  "Airdrops": {
+    "title": "ACTIVE PROTOCOLS",
+    "subtitle": "Live network interactions and node farming operations.",
+    "viewAll": "FULL DATABASE",
+    "gradient_desc": "Decentralized Compute Layer. AI Training. Connect infrastructure, farm points, validate the network.",
+    "nexus_desc": "Distributed zkVM Supercomputer. Compressing the internet into a single verifiable execution layer.",
+    "hot_desc": "Native NEAR Protocol interface. On-chain mining and direct launchpad access via Telegram."
+  },
+  "AirdropsPage": {
+    "title": "ALPHA ARCHIVE",
+    "subtitle": "Curated database of high-signal Web3 opportunities.",
+    "status": "STATUS",
+    "potential": "REWARD",
+    "chain": "NETWORK",
+    "cost": "COST",
+    "action": "INITIATE",
+    "learnMore": "MANUAL"
+  }
+}

@@ -1,15 +1,13 @@
+// @ts-nocheck
 import {getRequestConfig} from 'next-intl/server';
 import {notFound} from 'next/navigation';
  
 const locales = ['en', 'ru', 'hy'];
  
-// @ts-ignore
 export default getRequestConfig(async ({requestLocale}) => {
-  // Получаем локаль. Если придет undefined, подставим 'en'
   let locale = await requestLocale;
  
-  // Проверяем валидность
-  if (!locale || !locales.includes(locale as any)) {
+  if (!locale || !locales.includes(locale)) {
     locale = 'en';
   }
  

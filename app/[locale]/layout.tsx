@@ -9,13 +9,14 @@ import "../globals.css";
 // 1. ПОДКЛЮЧАЕМ MONTSERRAT ARM
 // 👇 ВАЖНО: Исправил .otf на .OTF (как в названиях файлов)
 
+// ...
 const montserrat = localFont({
   src: [
-    { path: '../fonts/mont-reg.otf', weight: '400', style: 'normal' },
-    { path: '../fonts/mont-med.otf', weight: '500', style: 'normal' },
-    { path: '../fonts/mont-semi.otf', weight: '600', style: 'normal' },
-    { path: '../fonts/mont-bold.otf', weight: '700', style: 'normal' },
-    { path: '../fonts/mont-black.otf', weight: '900', style: 'normal' },
+    { path: '../fonts/main-reg.otf', weight: '400', style: 'normal' },
+    { path: '../fonts/main-med.otf', weight: '500', style: 'normal' },
+    { path: '../fonts/main-semi.otf', weight: '600', style: 'normal' },
+    { path: '../fonts/main-bold.otf', weight: '700', style: 'normal' },
+    { path: '../fonts/main-black.otf', weight: '900', style: 'normal' },
   ],
   variable: "--font-montserrat",
   display: "swap",

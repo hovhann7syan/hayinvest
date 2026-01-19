@@ -10,11 +10,11 @@ import "../globals.css";
 // 👇 ВНИМАНИЕ: Папка 'typography' и расширение '.OTF' (БОЛЬШИМИ)
 const montserrat = localFont({
   src: [
-    { path: '../typography/main-reg.OTF', weight: '400', style: 'normal' },
-    { path: '../typography/main-med.OTF', weight: '500', style: 'normal' },
-    { path: '../typography/main-semi.OTF', weight: '600', style: 'normal' },
-    { path: '../typography/main-bold.OTF', weight: '700', style: 'normal' },
-    { path: '../typography/main-black.OTF', weight: '900', style: 'normal' },
+    { path: '../typography/mont-regular.otf', weight: '400', style: 'normal' },
+    { path: '../typography/mont-medium.otf', weight: '500', style: 'normal' },
+    { path: '../typography/mont-semibold.otf', weight: '600', style: 'normal' },
+    { path: '../typography/mont-bold.otf', weight: '700', style: 'normal' },
+    { path: '../typography/mont-black.otf', weight: '900', style: 'normal' },
   ],
   variable: "--font-montserrat",
   display: "swap",

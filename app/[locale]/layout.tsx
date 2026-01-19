@@ -6,28 +6,27 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer"; 
 import "../globals.css";
 
-// 1. ПОДКЛЮЧАЕМ MONTSERRAT ARM
-// 👇 ВАЖНО: Исправил .otf на .OTF (как в названиях файлов)
-
-// ...
+// 1. ПОДКЛЮЧАЕМ MONTSERRAT
+// 👇 ВНИМАНИЕ: Папка 'typography' и расширение '.OTF' (БОЛЬШИМИ)
 const montserrat = localFont({
   src: [
-    { path: '../fonts/main-reg.otf', weight: '400', style: 'normal' },
-    { path: '../fonts/main-med.otf', weight: '500', style: 'normal' },
-    { path: '../fonts/main-semi.otf', weight: '600', style: 'normal' },
-    { path: '../fonts/main-bold.otf', weight: '700', style: 'normal' },
-    { path: '../fonts/main-black.otf', weight: '900', style: 'normal' },
+    { path: '../typography/main-reg.OTF', weight: '400', style: 'normal' },
+    { path: '../typography/main-med.OTF', weight: '500', style: 'normal' },
+    { path: '../typography/main-semi.OTF', weight: '600', style: 'normal' },
+    { path: '../typography/main-bold.OTF', weight: '700', style: 'normal' },
+    { path: '../typography/main-black.OTF', weight: '900', style: 'normal' },
   ],
   variable: "--font-montserrat",
   display: "swap",
 });
 
-// 2. ПОДКЛЮЧАЕМ ADELLE SANS ARM
+// 2. ПОДКЛЮЧАЕМ ADELLE (Тут оставляем .ttf маленькими, судя по скрину они там маленькие)
 const adelle = localFont({
   src: [
-    { path: '../fonts/AdelleSans_ARM-Regular.ttf', weight: '400', style: 'normal' },
-    { path: '../fonts/AdelleSans_ARM-Italic.ttf', weight: '400', style: 'italic' },
-    { path: '../fonts/AdelleSans_ARM-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../typography/AdelleSans_ARM-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../typography/AdelleSans_ARM-Italic.ttf', weight: '400', style: 'italic' },
+    { path: '../typography/AdelleSans_ARM-Bold.ttf', weight: '700', style: 'normal' },
+    // Добавь остальные, если используешь, но путь теперь '../typography/...'
   ],
   variable: "--font-adelle",
   display: "swap",
@@ -52,15 +51,10 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${montserrat.variable} ${adelle.variable} antialiased bg-[#010003] text-white font-sans flex flex-col min-h-screen`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
-          {/* Глобальное меню */}
           <Header />
-          
-          {/* Основной контент страницы */}
           <main className="pt-20 flex-grow"> 
             {children}
           </main>
-
-          {/* Глобальный подвал */}
           <Footer />
         </NextIntlClientProvider>
       </body>

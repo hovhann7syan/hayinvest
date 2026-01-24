@@ -1,9 +1,10 @@
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
-// 👇 Правильные импорты для главной страницы
+
+// 👇 ИМПОРТИРУЕМ ВСЕ КОМПОНЕНТЫ
 import CryptoTicker from '../../components/CryptoTicker';
-import StatsSection from '../../components/StatsSection';
+import StatsSection from '../../components/StatsSection'; // 👈 Вот он, с логотипами!
 import AdBanner from '../../components/AdBanner'; 
 
 type Props = {
@@ -76,13 +77,13 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* --- LIVE TICKER --- */}
+      {/* --- БЕГУЩАЯ СТРОКА --- */}
       <CryptoTicker />
 
-      {/* 👇 ТВОЙ БАННЕР ТЕПЕРЬ ТУТ 👇 */}
+      {/* --- БАННЕР --- */}
       <AdBanner />
 
-      {/* --- BENTO GRID SECTION (Карточки разделов) --- */}
+      {/* --- Bento Grid (Карточки) --- */}
       <section className="relative z-10 container mx-auto px-4 py-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4 tracking-tight">The Ecosystem</h2>
@@ -166,7 +167,7 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* --- STATS SECTION --- */}
+      {/* 👇 ВОТ ТУТ СТОЯТ ЛОГОТИПЫ БЛОКЧЕЙНОВ 👇 */}
       <StatsSection />
 
     </main>

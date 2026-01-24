@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { motion } from "framer-motion";
 import Link from 'next/link';
+// 👇 Импортируем баннер
+import AdBanner from '../../../components/AdBanner';
 
 // --- ДАННЫЕ ПРОЕКТОВ ---
 const projects = [
@@ -15,7 +17,7 @@ const projects = [
     cost: "Free",
     potential: "$$$$",
     color: "from-orange-400 to-pink-500",
-    link: "https://gradient.network/",         // Рефералка
+    link: "https://gradient.network/",        // Рефералка
     tgLink: "https://t.me/hay_invest/780"      // Пост в TG
   },
   {
@@ -63,7 +65,7 @@ export default function AirdropsPage() {
   const tPage = useTranslations('AirdropsPage'); // Тексты страницы (кнопки, заголовки)
 
   return (
-    <div className="min-h-screen pt-32 pb-20 px-6 relative">
+    <div className="min-h-screen pt-32 pb-20 px-6 relative bg-obsidian-900 overflow-x-hidden">
       
       {/* Фоновый свет */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-indigo-900/20 blur-[120px] rounded-full pointer-events-none z-0" />
@@ -71,11 +73,11 @@ export default function AirdropsPage() {
       <div className="container mx-auto relative z-10 max-w-5xl">
         
         {/* ЗАГОЛОВОК СТРАНИЦЫ */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black mb-4 tracking-tighter"
+            className="text-5xl md:text-7xl font-black mb-4 tracking-tighter text-white"
           >
             {tPage('title')}
           </motion.h1>
@@ -87,6 +89,11 @@ export default function AirdropsPage() {
           >
             {tPage('subtitle')}
           </motion.p>
+        </div>
+
+        {/* 📢 РЕКЛАМНЫЙ БАННЕР (Добавлен сюда) */}
+        <div className="mb-16">
+          <AdBanner />
         </div>
 
         {/* СПИСОК ПРОЕКТОВ */}
@@ -111,7 +118,7 @@ export default function AirdropsPage() {
                 {/* ЛЕВАЯ ЧАСТЬ: Информация */}
                 <div className="flex-1">
                   <div className="flex items-center gap-4 mb-3">
-                    <h2 className="text-2xl font-bold">{project.title}</h2>
+                    <h2 className="text-2xl font-bold text-white">{project.title}</h2>
                     <span className="px-3 py-1 bg-white/5 rounded-full text-[10px] uppercase font-mono tracking-wider text-gray-400 border border-white/5">
                       {project.status}
                     </span>
@@ -125,16 +132,16 @@ export default function AirdropsPage() {
                   {/* Мета-данные (Сеть, Затраты, Потенциал) */}
                   <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs font-mono text-gray-500">
                     <div className="flex items-center gap-2">
-                       <span className="text-indigo-400">{tPage('chain')}:</span> 
-                       <span className="text-gray-300">{project.network}</span>
+                        <span className="text-indigo-400">{tPage('chain')}:</span> 
+                        <span className="text-gray-300">{project.network}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                       <span className="text-indigo-400">{tPage('cost')}:</span> 
-                       <span className="text-gray-300">{project.cost}</span>
+                        <span className="text-indigo-400">{tPage('cost')}:</span> 
+                        <span className="text-gray-300">{project.cost}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                       <span className="text-indigo-400">{tPage('potential')}:</span> 
-                       <span className="text-green-400 font-bold">{project.potential}</span>
+                        <span className="text-indigo-400">{tPage('potential')}:</span> 
+                        <span className="text-green-400 font-bold">{project.potential}</span>
                     </div>
                   </div>
                 </div>

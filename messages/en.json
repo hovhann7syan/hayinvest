@@ -1,10 +1,21 @@
 {
-  "Header": {
+  "Navigation": {
     "airdrops": "Airdrops",
-    "investments": "Fundraising",
+    "events": "Events",
     "academy": "Academy",
-    "channel": "Channel",
-    "join": "Join Team"
+    "careers": "Careers"
+  },
+  "Index": {
+    "meta_title": "HayInvest | The #1 Web3 Ecosystem in Armenia",
+    "meta_description": "The gateway to Web3 culture. Exclusive airdrops, premium education, and the most influential crypto community in Armenia."
+  },
+  "Careers": {
+    "meta_title": "Careers | HayInvest",
+    "meta_description": "Join the team building the future of Web3 in Armenia."
+  },
+  "Events": {
+    "meta_title": "Crypto Events | HayInvest",
+    "meta_description": "The biggest crypto meetups and conferences in Yerevan."
   },
   "Hero": {
     "welcome": "WELCOME TO",

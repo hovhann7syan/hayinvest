@@ -1,124 +1,84 @@
 "use client";
-
 import { useTranslations } from 'next-intl';
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import Scene3D from './Scene3D';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
-  const t = useTranslations('Hero');
-  const containerRef = useRef(null);
-  const { scrollY } = useScroll();
-
-  // --- 🌊 НАСТРОЙКИ ФИЗИКИ ---
-  const physics = { stiffness: 50, damping: 20, mass: 1 };
-
-  // --- 1. ПАРАЛЛАКС ФОНА ---
-  const sceneYRaw = useTransform(scrollY, [0, 1000], [0, 100]); 
-  const sceneOpacityRaw = useTransform(scrollY, [0, 500], [1, 0]);
-  const sceneY = useSpring(sceneYRaw, physics);
-  const sceneOpacity = useSpring(sceneOpacityRaw, physics);
-
-  // --- 2. ПАРАЛЛАКС КОНТЕНТА ---
-  const textYRaw = useTransform(scrollY, [0, 1000], [0, 300]);
-  const textOpacityRaw = useTransform(scrollY, [0, 400], [1, 0]);
-  const textY = useSpring(textYRaw, physics);
-  const textOpacity = useSpring(textOpacityRaw, physics);
+  const t = useTranslations('Index'); // Убедись, что в en.json есть ключи
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-[#010003] perspective-[1200px]"
-    >
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center overflow-hidden bg-obsidian-900 text-white pt-20">
       
-      {/* --- СЛОЙ 1: 3D ФОН --- */}
-      <motion.div 
-        className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none"
-        style={{ y: sceneY, opacity: sceneOpacity, scale: 1.05 }}
-      >
-        <Scene3D />
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#010003] to-transparent" />
-      </motion.div>
+      {/* 1. ФОНОВЫЕ ЭФФЕКТЫ (AURORA) - Легкие div-ы вместо Canvas */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        {/* Фиолетовое пятно */}
+        <div className="absolute top-[-10%] left-[20%] w-[500px] h-[500px] bg-purple-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob opacity-70"></div>
+        {/* Синее пятно */}
+        <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] bg-blue-600/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000 opacity-60"></div>
+        {/* Розовое пятно снизу */}
+        <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[600px] bg-pink-600/20 rounded-full mix-blend-screen filter blur-[120px] animate-blob animation-delay-4000 opacity-50"></div>
+      </div>
 
-      {/* --- СЛОЙ 2: ВИНЬЕТКА --- */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_10%,#010003_120%)] pointer-events-none z-[1]" />
-
-      {/* --- СЛОЙ 3: КОНТЕНТ --- */}
-      <motion.div 
-        className="relative z-10 w-full max-w-5xl mx-auto px-4 flex flex-col items-center text-center justify-center"
-        style={{ y: textY, opacity: textOpacity }}
-      >
+      {/* 2. КОНТЕНТ (Поверх фона) */}
+      <div className="relative z-10 container mx-auto px-4 text-center">
         
-        {/* СТАТУС */}
+        {/* Бейдж сверху */}
         <motion.div 
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-white/5 border border-white/5 backdrop-blur-xl shadow-lg"
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-8"
         >
-           <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-50 duration-1000"></span>
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-          </span>
-          <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-gray-400">
-            {t('badge')}
+          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+          <span className="text-sm font-medium text-gray-300 tracking-wide uppercase">
+            The #1 Crypto Hub in Armenia
           </span>
         </motion.div>
 
-        {/* ЗАГОЛОВОК (ИСПРАВЛЕННЫЙ) */}
-        <h1 className="text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 tracking-tighter leading-[0.95] select-none relative font-sans drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]">
-          <motion.span
-             initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
-             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-             className="block"
-          >
-            {/* 1. Верхняя строка: WELCOME TO */}
-            {t('welcome')} <br />
-            
-            {/* 2. Нижняя строка: HAYINVEST (Градиент) */}
-            {/* 👇 УБРАЛ СЛОВО ECOSYSTEM, теперь текст берется из JSON */}
-            <span className="text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-600">
-                {t('title')} 
-            </span>
-          </motion.span>
-        </h1>
+        {/* Заголовок */}
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="text-5xl md:text-7xl font-black tracking-tight mb-6 font-sans bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500"
+        >
+          THE FUTURE OF <br className="hidden md:block" />
+          <span className="text-white drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]">
+            WEB3 INVESTING
+          </span>
+        </motion.h1>
 
-        {/* ПОДЗАГОЛОВОК */}
+        {/* Описание */}
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
-          className="text-gray-300 text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed font-mono font-medium tracking-widest uppercase opacity-80"
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 font-light"
         >
-          {t('subtitle')}
+          Join the most influential crypto community. Access exclusive airdrops, local events, and premium education.
         </motion.p>
 
-        {/* КНОПКИ */}
-        <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-           className="flex flex-col md:flex-row items-center justify-center gap-4 w-full"
+        {/* Кнопки */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="flex flex-col md:flex-row gap-4 justify-center items-center"
         >
-            <a href="https://t.me/hay_invest" target="_blank" className="group relative w-full md:w-auto min-w-[200px] px-6 py-4 bg-white overflow-hidden text-center transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
-                <div className="absolute inset-0 w-full h-full bg-indigo-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-                <span className="relative z-10 text-black group-hover:text-white font-mono font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-500">
-                    {t('channel')}
-                </span>
-            </a>
-            
-            <a href="https://t.me/hayinvest_chat" target="_blank" className="group w-full md:w-auto min-w-[200px] px-6 py-4 border border-white/20 hover:border-white/40 bg-transparent hover:bg-white/5 transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm">
-              <span className="text-gray-300 group-hover:text-white font-mono font-bold text-[10px] md:text-xs tracking-[0.2em] uppercase transition-colors duration-300">
-                  {t('team')}
-              </span>
-              <span className="text-gray-500 group-hover:text-white transition-colors duration-300 transform group-hover:translate-x-1 text-xs">
-                  →
-              </span>
-            </a>
+          {/* Главная кнопка */}
+          <button className="px-8 py-4 bg-white text-black font-bold rounded-xl hover:scale-105 transition-transform duration-200 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+            Start Exploring
+          </button>
+          
+          {/* Вторичная кнопка */}
+          <button className="px-8 py-4 bg-white/5 border border-white/10 backdrop-blur-md text-white font-medium rounded-xl hover:bg-white/10 transition-colors">
+            View Events
+          </button>
         </motion.div>
-
-      </motion.div>
+      </div>
+      
+      {/* 3. Декоративная сетка внизу (Bento намек) */}
+      <div className="absolute bottom-0 w-full h-32 bg-gradient-to-t from-obsidian-900 to-transparent z-20 pointer-events-none"></div>
+      
     </section>
   );
 }

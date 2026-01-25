@@ -7,15 +7,27 @@
   },
   "Index": {
     "meta_title": "HayInvest | The #1 Web3 Ecosystem in Armenia",
-    "meta_description": "The gateway to Web3 culture. Exclusive airdrops, premium education, and the most influential crypto community in Armenia."
-  },
-  "Careers": {
-    "meta_title": "Careers | HayInvest",
-    "meta_description": "Join the team building the future of Web3 in Armenia."
-  },
-  "Events": {
-    "meta_title": "Crypto Events | HayInvest",
-    "meta_description": "The biggest crypto meetups and conferences in Yerevan."
+    "meta_description": "The gateway to Web3 culture. Exclusive airdrops, premium education, and the most influential crypto community in Armenia.",
+    "sys_online": "SYS.ONLINE",
+    "conn_established": "CONN_ESTABLISHED",
+    "hero_title_1": "FUTURE",
+    "hero_title_2": "ECONOMY",
+    "hero_title_3": "ARCHITECTS",
+    "hero_desc": "We don't just predict the market. <span class='text-white font-medium'>We engineer it.</span> <br/>Join the elite circle of Web3 natives, investors, and builders.",
+    "btn_access": "INITIALIZE ACCESS",
+    "btn_network": "JOIN NETWORK",
+    "ecosystem_title": "Ecosystem Modules",
+    "sector_status": "SECTOR: ALPHA // ACCESS: GRANTED",
+    "mod_alpha_title": "Alpha Terminal",
+    "mod_alpha_desc": "Access high-value airdrops and farming strategies before public release.",
+    "mod_alpha_tag": "ACTIVE",
+    "mod_academy_title": "Academy",
+    "mod_academy_desc": "Master the protocols.",
+    "mod_events_title": "Events",
+    "mod_events_desc": "Offline networking.",
+    "mod_network_title": "Join the Network",
+    "mod_network_desc": "Connect with builders, investors, and architects.",
+    "mod_network_signal": "SIGNAL: STRONG"
   },
   "Hero": {
     "welcome": "WELCOME TO",
@@ -23,7 +35,28 @@
     "subtitle": "Node Runners. Alpha Hunters. DeFi Natives. We find the signal in the noise.",
     "channel": "ENTER CHANNEL",
     "team": "JOIN CORE TEAM",
-    "badge": "ARMENIA NODE: ONLINE"
+    "badge": "YEREVAN NODE: ONLINE"
+  },
+  "Careers": {
+    "meta_title": "Careers | HayInvest",
+    "meta_description": "Join the team building the future of Web3 in Armenia.",
+    "title": "Join the Architects of the New Economy",
+    "subtitle": "We are not just watching the revolution. We are coding it.",
+    "intro": "The old world is built on bureaucracy and legacy systems. HayInvest is built on code, transparency, and speed. We are looking for visionaries who understand that Web3 is not just a technology—it's the foundation of the next civilization.",
+    "culture": "We don't offer 'work-life balance' in the traditional sense. We offer a mission. Here, you will work with high-signal individuals, build decentralized infrastructure, and shape the future of finance. If you are ready to leave the legacy world behind, welcome home.",
+    "form_title": "Apply for Access",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Telegram / Phone",
+    "linkedin": "LinkedIn / Portfolio URL",
+    "resume": "Upload CV / Resume",
+    "cover_letter": "Why you? (Cover Letter)",
+    "submit": "Initialize Application",
+    "upload_placeholder": "No file chosen"
+  },
+  "Events": {
+    "meta_title": "Crypto Events | HayInvest",
+    "meta_description": "The biggest crypto meetups and conferences in Yerevan."
   },
   "Footer": {
     "desc": "Decentralized collective. Focused on infrastructure, research, and early opportunities.",
@@ -33,7 +66,7 @@
     "support_desc": "OPERATIONAL HELP",
     "collab": "PARTNERSHIP",
     "collab_desc": "BUSINESS INQUIRIES",
-    "rights": "ALL SYSTEMS OPERATIONAL.",
+    "rights": "ALL RIGHTS RESERVED.",
     "powered": "POWERED BY"
   },
   "Airdrops": {
@@ -42,7 +75,9 @@
     "viewAll": "FULL DATABASE",
     "gradient_desc": "Decentralized Compute Layer. AI Training. Connect infrastructure, farm points, validate the network.",
     "nexus_desc": "Distributed zkVM Supercomputer. Compressing the internet into a single verifiable execution layer.",
-    "hot_desc": "Native NEAR Protocol interface. On-chain mining and direct launchpad access via Telegram."
+    "hot_desc": "Native NEAR Protocol interface. On-chain mining and direct launchpad access via Telegram.",
+    "grass_desc": "Monetize your unused internet bandwidth on Solana. The team is preparing for the 2nd Airdrop. DePIN category leader.",
+    "dawn_desc": "Decentralized internet on Solana with $38M funding (VanEck, Series A). Similar to Grass but with stronger backing and higher potential."
   },
   "AirdropsPage": {
     "title": "ALPHA ARCHIVE",
@@ -53,5 +88,36 @@
     "cost": "COST",
     "action": "INITIATE",
     "learnMore": "MANUAL"
+  },
+  "Newsletter": {
+    "system_status": "SYSTEM MESSAGE: ALPHA FEED",
+    "title": "JOIN THE INNER CIRCLE",
+    "subtitle": "Get the latest Alpha, Airdrops, and Market Insights delivered directly to your inbox.",
+    "placeholder": "ENTER SECURE EMAIL",
+    "button": "INITIALIZE SUBSCRIPTION",
+    "disclaimer": "NO SPAM. ENCRYPTED TRANSMISSION. UNSUBSCRIBE ANYTIME."
+  },
+  "Academy": {
+    "badge": "JOINT OPERATION",
+    "title": "HayInvest x Profit Triumph",
+    "subtitle": "Systematic trading education combined with exclusive Web3 insights. Stop gambling, start operating.",
+    "stat_duration": "2 MONTHS",
+    "stat_frequency": "3 LESSONS / WEEK",
+    "stat_level": "ZERO TO PRO",
+    "modules_title": "Operational Modules",
+    "module_1": "Technical Analysis & Market Structure",
+    "module_2": "Risk Management & Psychology",
+    "module_3": "Trading Strategy Development",
+    "exclusive_title": "The HayInvest Edge",
+    "exclusive_desc": "Exclusive 2-hour strategic session by @hovhann7syan. Unfiltered knowledge not found in public sources.",
+    "exclusive_tags": "DeFi // Airdrops // DePin // Staking",
+    "offer_title": "Access Grant",
+    "offer_price_old": "$500",
+    "offer_price_new": "$450",
+    "offer_discount": "10% OFF FOR COMMUNITY",
+    "promo_label": "ACCESS CODE:",
+    "btn_apply": "APPLY NOW",
+    "btn_secure": "SECURE LINK",
+    "cta_button": "APPLY NOW"
   }
 }

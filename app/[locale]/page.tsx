@@ -1,12 +1,14 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+// 👇 ВАЖНОЕ ИЗМЕНЕНИЕ: Импортируем Link из ТВОЕГО файла navigation, а не из next/link
+import { Link } from '../../navigation'; 
 import { motion, Variants } from 'framer-motion';
 
 // 👇 ИМПОРТЫ КОМПОНЕНТОВ
 import CryptoTicker from '../../components/CryptoTicker';
-import StatsSection from '../../components/StatsSection';
+import TechMarquee from '../../components/TechMarquee'; 
+import Partners from '../../components/Partners';
 import AdBanner from '../../components/AdBanner'; 
 import Newsletter from '../../components/Newsletter'; 
 
@@ -28,17 +30,8 @@ export default function IndexPage() {
   };
 
   return (
-    <main className="relative w-full min-h-screen flex flex-col bg-[#050505] text-white overflow-x-hidden selection:bg-green-500/30 selection:text-green-200">
+    <main className="relative w-full min-h-screen flex flex-col bg-transparent text-white overflow-x-hidden selection:bg-green-500/30 selection:text-green-200">
       
-      {/* --- ГЛОБАЛЬНАЯ СЕТКА --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.15]" 
-           style={{ 
-             backgroundImage: 'linear-gradient(#444 1px, transparent 1px), linear-gradient(90deg, #444 1px, transparent 1px)', 
-             backgroundSize: '40px 40px' 
-           }}>
-      </div>
-      <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none bg-noise mix-blend-overlay"></div>
-
       {/* --- HERO SECTION --- */}
       <section className="relative z-10 container mx-auto px-6 pt-32 pb-24 flex flex-col justify-center min-h-[90vh]">
         
@@ -82,6 +75,7 @@ export default function IndexPage() {
              transition={{ delay: 0.6 }}
              className="flex flex-col md:flex-row gap-4 w-full md:w-auto"
           >
+            {/* 👇 Ссылка теперь "умная" благодаря импорту сверху */}
             <Link href="/airdrops" className="group relative px-10 py-5 bg-white text-black font-bold uppercase tracking-widest text-xs hover:bg-green-400 transition-colors text-center">
               <span className="relative z-10">{t('btn_access')}</span>
               <div className="absolute inset-0 bg-green-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
@@ -93,14 +87,14 @@ export default function IndexPage() {
         </div>
       </section>
 
-      {/* --- TICKER --- */}
+      {/* --- TICKER (ЦЕНЫ) --- */}
       <div className="border-y border-white/10 bg-black/50 backdrop-blur-sm">
         <CryptoTicker />
       </div>
 
       <AdBanner />
 
-      {/* --- THE GRID (BENTO) --- */}
+      {/* --- THE GRID (BENTO - СЕТКА ПРОЕКТОВ) --- */}
       <section className="relative z-10 container mx-auto px-4 py-24">
         
         <div className="flex items-end justify-between mb-12">
@@ -127,6 +121,7 @@ export default function IndexPage() {
                   style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)', backgroundSize: '20px 20px' }}>
              </div>
              
+             {/* 👇 Ссылка теперь "умная" */}
              <Link href="/airdrops" className="block h-full w-full p-8 flex flex-col justify-between relative z-20">
                 <div className="flex justify-between items-start">
                    <div className="p-2 border border-green-500/30 text-green-500 rounded-sm bg-green-900/10">
@@ -157,6 +152,7 @@ export default function IndexPage() {
                 01001000 01100001<br/>01111001 01001001<br/>01101110 01110110<br/>01100101 01110011<br/>01110100 00100000<br/>PROT_SEQ_INIT...
              </div>
 
+             {/* 👇 Ссылка теперь "умная" */}
              <Link href="/academy" className="block h-full w-full p-8 flex flex-col justify-between relative z-20">
                 <div className="flex justify-between items-start">
                    <div className="p-2 border border-blue-500/30 text-blue-500 rounded-sm bg-blue-900/10">
@@ -192,6 +188,7 @@ export default function IndexPage() {
                 <div className="absolute w-full h-[1px] bg-purple-500/10 -rotate-45"></div>
              </div>
 
+             {/* 👇 Ссылка теперь "умная" */}
              <Link href="/events" className="block h-full w-full p-8 flex flex-col justify-between relative z-20">
                 <div className="flex justify-between items-start">
                    <div className="p-2 border border-purple-500/30 text-purple-500 rounded-sm bg-purple-900/10">
@@ -214,9 +211,14 @@ export default function IndexPage() {
 
            {/* 4. NETWORK */}
            <motion.div variants={itemVars} className="group md:col-span-2 relative h-[320px] bg-[#0f0f0f] border border-white/5 hover:border-white/50 transition-all duration-300 overflow-hidden">
+            
             <div className="absolute bottom-0 left-0 right-0 h-20 opacity-20 flex items-end gap-1 px-8 pointer-events-none">
-               {[...Array(20)].map((_, i) => (
-                  <div key={i} className="w-1 bg-green-500/50" style={{ height: `${Math.random() * 100}%` }}></div>
+               {[20, 45, 60, 30, 70, 40, 80, 25, 55, 35, 65, 50, 90, 15, 75, 45, 60, 30, 50, 20].map((height, i) => (
+                  <div 
+                    key={i} 
+                    className="w-1 bg-green-500/50" 
+                    style={{ height: `${height}%` }} 
+                  ></div>
                ))}
             </div>
 
@@ -246,7 +248,10 @@ export default function IndexPage() {
         </motion.div>
       </section>
 
-      <StatsSection />
+      {/* 👇 2. НОВОЕ МЕСТО ДЛЯ БЕГУЩЕЙ СТРОКИ (МЕЖДУ СЕТКОЙ И СТАТИСТИКОЙ) 👇 */}
+      <TechMarquee />
+
+      <Partners />
       <Newsletter />
 
     </main>

@@ -1,30 +1,33 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useLocale } from "next-intl"; 
 
 export default function AdBanner() {
-  // 👇 НАСТРОЙКИ БАННЕРОВ
+  const locale = useLocale(); // Получаем текущий язык ('en', 'ru', 'hy')
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Настройки ссылок для каждого баннера
   const ads = [
     {
-      id: 1,
-      image: "/ads/banner.png", // Первый баннер
-      link: "https://partner.bitget.com/bg/YOUR_LINK", // ⚠️ Твоя рефералка
-      alt: "Bitget Partner"
+      id: 1, // Файлы: banner1en.png, banner1ru.png, banner1hy.png
+      link: "https://t.me/hayinvest", 
+      alt: "HayInvest Ecosystem"
     },
     {
-      id: 2,
-      image: "/ads/banner1.png", // Второй баннер
-      link: "https://t.me/MiningArmenia", // ✅ Ссылка Mining Armenia
-      alt: "Mining Armenia"
+      id: 2, // Файлы: banner2en.png, banner2ru.png, banner2hy.png
+      link: "https://instagram.com/profit_triumph", 
+      alt: "Profit Triumph"
+    },
+    {
+      id: 3, // Файлы: banner3en.png, banner3ru.png, banner3hy.png
+      link: "https://t.me/hovhann7syan", // Твой контакт
+      alt: "Partnership"
     }
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   // Слайдер: переключение каждые 5 секунд
   useEffect(() => {
-    if (ads.length <= 1) return;
-
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % ads.length);
     }, 5000); 
@@ -32,13 +35,11 @@ export default function AdBanner() {
     return () => clearInterval(timer);
   }, [ads.length]);
 
-  if (ads.length === 0) return null;
-
   return (
-    <section className="container mx-auto px-4 mt-10 mb-10">
+    <section className="container mx-auto px-4 mt-12 mb-12">
       
       {/* Контейнер баннера */}
-      <div className="relative w-full h-[100px] md:h-[120px] rounded-2xl overflow-hidden border border-white/10 shadow-lg group bg-obsidian-800">
+      <div className="relative w-full h-[120px] md:h-[160px] rounded-xl overflow-hidden border border-white/10 shadow-2xl group bg-[#050505]">
         
         {ads.map((ad, index) => (
           <a
@@ -46,22 +47,23 @@ export default function AdBanner() {
             href={ad.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+            className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
               index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            {/* Картинка */}
+            {/* 👇 ИСПРАВЛЕНИЕ: Убрал 'md:object-fill', оставил только 'object-cover' */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
-              src={ad.image} 
+              src={`/ads/banner${ad.id}${locale}.png`} 
               alt={ad.alt}
-              className="w-full h-full object-cover md:object-fill" 
+              className="w-full h-full object-cover hover:scale-[1.02] transition-transform duration-700" 
             />
           </a>
         ))}
 
-        {/* Плашка "Partner" */}
-        <div className="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded text-[10px] text-gray-400 uppercase tracking-widest z-20 pointer-events-none border border-white/5">
-          Partner
+        {/* Прогресс бар снизу */}
+        <div className="absolute bottom-0 left-0 h-1 bg-green-500/50 z-20 transition-all duration-500"
+             style={{ width: `${((currentIndex + 1) / ads.length) * 100}%` }}>
         </div>
 
       </div>

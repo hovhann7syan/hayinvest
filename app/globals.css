@@ -3,9 +3,10 @@
 @tailwind utilities;
 
 body {
-  background: #0a0b0d;
+  background: #050505; /* Глубокий черный */
   color: white;
 }
+
 /* --- LENIS SMOOTH SCROLL FIX --- */
 html.lenis, html.lenis body {
   height: auto;
@@ -22,12 +23,8 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
-/* ... остальной код ... */
 
-/* Шум для фона, чтобы убрать "пластиковый" эффект */
-/* ... весь остальной код выше не трогаем ... */
-
-/* Шум (Noise) - Premium Soft Version */
+/* --- NOISE TEXTURE (PREMIUM FILM GRAIN) --- */
 .bg-noise {
   position: relative;
 }
@@ -37,39 +34,26 @@ html.lenis, html.lenis body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 50; /* Лежит поверх контента как "пленка", но не мешает кликам */
-  opacity: 0.02; /* 👈 БЫЛО 0.05 (СЛИШКОМ МНОГО), СТАЛО 0.02 (ИДЕАЛЬНО) */
-  mix-blend-mode: overlay; /* Мягкое смешивание */
+  z-index: 50;
+  opacity: 0.03; /* Оптимальная прозрачность для дорогого эффекта */
+  mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
-/* app/globals.css */
 
-/* ... твой существующий код ... */
+/* ========================================= */
+/* 🔥 АНИМАЦИЯ ЖИВОГО ФОНА (CYBER AURORA) 🔥 */
+/* ========================================= */
 
-/* Анимация для фоновых градиентов */
-@keyframes blob {
-  0% {
-    transform: translate(0px, 0px) scale(1);
-  }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
-  }
-  100% {
-    transform: translate(0px, 0px) scale(1);
-  }
+@keyframes blob-float {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(50px, -80px) scale(1.1); }
+  66% { transform: translate(-30px, 50px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
 }
 
 .animate-blob {
-  animation: blob 7s infinite;
+  animation: blob-float 15s infinite ease-in-out;
 }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
-}
-
-.animation-delay-4000 {
-  animation-delay: 4s;
-}
+.animation-delay-2000 { animation-delay: 2s; }
+.animation-delay-4000 { animation-delay: 4s; }

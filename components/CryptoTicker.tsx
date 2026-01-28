@@ -1,104 +1,92 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
-// Список ID монет
+// Список монет для тикера
 const COINS = [
-  { id: "bitcoin", symbol: "BTC" },
-  { id: "ethereum", symbol: "ETH" },
-  { id: "solana", symbol: "SOL" },
-  { id: "the-open-network", symbol: "TON" },
-  { id: "arbitrum", symbol: "ARB" },
-  { id: "optimism", symbol: "OP" },
-  { id: "sui", symbol: "SUI" },
-  { id: "aptos", symbol: "APT" },
-  { id: "matic-network", symbol: "POL" },
-  { id: "avalanche-2", symbol: "AVAX" },
-  { id: "celestia", symbol: "TIA" }
+  { id: 'bitcoin', symbol: 'BTC', name: 'Bitcoin' },
+  { id: 'ethereum', symbol: 'ETH', name: 'Ethereum' },
+  { id: 'solana', symbol: 'SOL', name: 'Solana' },
+  { id: 'near', symbol: 'NEAR', name: 'NEAR Protocol' },
+  { id: 'toncoin', symbol: 'TON', name: 'Toncoin' },
+  { id: 'cardano', symbol: 'ADA', name: 'Cardano' },
+  { id: 'ripple', symbol: 'XRP', name: 'XRP' },
+  { id: 'dogecoin', symbol: 'DOGE', name: 'Dogecoin' },
 ];
 
-type CoinData = {
-  [key: string]: {
-    usd: number;
-    usd_24h_change: number;
-  };
+// Запасные цены (если API заблокирует нас)
+const FALLBACK_PRICES: Record<string, { usd: number; usd_24h_change: number }> = {
+  bitcoin: { usd: 64200, usd_24h_change: 2.5 },
+  ethereum: { usd: 3450, usd_24h_change: 1.2 },
+  solana: { usd: 145, usd_24h_change: 5.4 },
+  near: { usd: 7.2, usd_24h_change: -1.5 },
+  toncoin: { usd: 6.8, usd_24h_change: 3.1 },
+  cardano: { usd: 0.45, usd_24h_change: 0.5 },
+  ripple: { usd: 0.61, usd_24h_change: -0.2 },
+  dogecoin: { usd: 0.16, usd_24h_change: 4.0 },
 };
 
 export default function CryptoTicker() {
-  const [data, setData] = useState<CoinData | null>(null);
+  const [prices, setPrices] = useState<Record<string, { usd: number; usd_24h_change: number }>>(FALLBACK_PRICES);
 
   useEffect(() => {
     const fetchPrices = async () => {
       try {
         const ids = COINS.map(c => c.id).join(',');
+        
+        // Пытаемся получить реальные цены
         const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
         
         if (!res.ok) {
-           return; 
+          throw new Error('API Rate Limit or Error');
         }
+
+        const data = await res.json();
+        setPrices(data);
         
-        const jsonData = await res.json();
-        setData(jsonData);
       } catch (error) {
-        console.error("Ticker error:", error);
+        // Если ошибка — просто используем запасные данные и не ломаем сайт
+        console.warn("⚠️ CryptoTicker: API недоступен, используем резервные данные.");
+        setPrices(FALLBACK_PRICES); 
       }
     };
 
     fetchPrices();
-    const interval = setInterval(fetchPrices, 60000);
+    
+    // Обновляем раз в 60 секунд, чтобы не спамить API
+    const interval = setInterval(fetchPrices, 60000); 
     return () => clearInterval(interval);
   }, []);
 
-  const CoinItem = ({ coin }: { coin: typeof COINS[0] }) => {
-    const coinInfo = data ? data[coin.id] : null;
-
-    if (!coinInfo || typeof coinInfo.usd === 'undefined') {
-      return (
-        <span className="mx-4 md:mx-8 text-[10px] md:text-xs font-medium text-gray-600 animate-pulse cursor-default">
-          {coin.symbol} ...
-        </span>
-      );
-    }
-
-    const price = coinInfo.usd.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
-    const changeVal = coinInfo.usd_24h_change || 0; 
-    const change = changeVal.toFixed(1); // Сократил до 1 знака после запятой
-    const isPositive = changeVal >= 0;
-
-    return (
-      <div className="mx-4 md:mx-8 flex items-center gap-1.5 text-[10px] md:text-xs font-medium tracking-wider cursor-default">
-        <span className="text-gray-400">{coin.symbol}</span>
-        <span className="text-white opacity-90">{price}</span>
-        <span className={`${isPositive ? 'text-green-400' : 'text-red-500'} text-[9px] md:text-[10px]`}>
-          {isPositive ? '↑' : '↓'} {Math.abs(Number(change))}%
-        </span>
-      </div>
-    );
-  };
-
   return (
-    // ИЗМЕНЕНИЯ ЗДЕСЬ:
-    // py-2 (было py-4) -> тоньше
-    // border-white/5 -> очень тонкая граница
-    // bg-obsidian-900/80 -> чуть прозрачнее
-    <div className="relative w-full bg-obsidian-900/80 backdrop-blur-sm border-y border-white/5 overflow-hidden py-2 select-none z-20">
-      
-      {/* Маски теперь тоже тоньше */}
-      <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-obsidian-900 to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-obsidian-900 to-transparent z-10 pointer-events-none"></div>
+    <div className="w-full overflow-hidden whitespace-nowrap py-3 flex items-center">
+      {/* Бегущая строка (дублируем контент для бесконечности) */}
+      <motion.div 
+        className="flex gap-12 items-center"
+        animate={{ x: [0, -1000] }}
+        transition={{
+          repeat: Infinity,
+          ease: "linear",
+          duration: 30, // Скорость бегущей строки
+        }}
+      >
+        {/* Рендерим 3 раза, чтобы заполнить широкий экран без дырок */}
+        {[...COINS, ...COINS, ...COINS].map((coin, i) => {
+          const priceData = prices[coin.id] || { usd: 0, usd_24h_change: 0 };
+          const isPositive = priceData.usd_24h_change >= 0;
 
-      <div className="flex whitespace-nowrap overflow-hidden group">
-        <div className="flex animate-marquee items-center group-hover:[animation-play-state:paused]">
-          {COINS.map((coin) => (
-            <CoinItem key={coin.id} coin={coin} />
-          ))}
-        </div>
-        <div className="flex animate-marquee items-center group-hover:[animation-play-state:paused]" aria-hidden="true">
-          {COINS.map((coin) => (
-            <CoinItem key={`dup-${coin.id}`} coin={coin} />
-          ))}
-        </div>
-      </div>
+          return (
+            <div key={`${coin.id}-${i}`} className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider">
+              <span className="text-gray-400 font-bold">{coin.symbol}</span>
+              <span className="text-white">${priceData.usd.toLocaleString()}</span>
+              <span className={`flex items-center ${isPositive ? 'text-green-400' : 'text-red-400'}`}>
+                {isPositive ? '▲' : '▼'} {Math.abs(priceData.usd_24h_change).toFixed(2)}%
+              </span>
+            </div>
+          );
+        })}
+      </motion.div>
     </div>
   );
 }

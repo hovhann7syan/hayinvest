@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { Analytics } from "@vercel/analytics/react"; // 👈 Добавил аналитику
+import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer"; 
 import "../globals.css";
@@ -48,32 +48,33 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className="h-full">
-      {/* Добавил selection цвета (выделение текста фиолетовым) и фон #050505 для слияния с футером */}
       <body className={`${montserrat.variable} ${adelle.variable} antialiased bg-[#050505] text-white font-sans flex flex-col min-h-screen selection:bg-purple-500/30 selection:text-purple-200`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           
-          {/* ================= 🔥 НОВЫЙ ЖИВОЙ ФОН 🔥 ================= */}
+          {/* ================= 🔥 ВОТ ЭТОТ БЛОК ТЫ ЗАБЫЛ 🔥 ================= */}
           <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
             
-            {/* 1. Техническая сетка */}
-            <div className="absolute inset-0 opacity-[0.15]" 
+            {/* 1. Сетка */}
+            <div className="absolute inset-0 opacity-[0.1]" 
                  style={{ 
-                   backgroundImage: 'linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)', 
+                   backgroundImage: 'linear-gradient(#222 1px, transparent 1px), linear-gradient(90deg, #222 1px, transparent 1px)', 
                    backgroundSize: '40px 40px' 
                  }}>
             </div>
             
-            {/* 2. Анимированные сферы (Градиент "Кибер-Аврора") */}
-            <div className="absolute top-0 -left-4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob"></div>
-            <div className="absolute bottom-0 -right-4 w-96 h-96 bg-green-500/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000"></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/20 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-4000 hidden md:block"></div>
+            {/* 2. Сами СФЕРЫ (которые используют твой CSS) */}
+            <div className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] bg-purple-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob"></div>
+            
+            <div className="absolute -bottom-[20%] -right-[10%] w-[70vw] h-[70vw] bg-green-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-2000"></div>
+            
+            <div className="absolute top-[30%] left-[40%] w-[50vw] h-[50vw] bg-indigo-600/10 rounded-full mix-blend-screen filter blur-[150px] opacity-30 animate-blob animation-delay-4000 hidden md:block"></div>
 
-            {/* 3. Шум для текстуры */}
-            <div className="fixed inset-0 opacity-[0.03] bg-noise mix-blend-overlay"></div>
+            {/* 3. Шум */}
+            <div className="fixed inset-0 opacity-[0.04] bg-noise mix-blend-overlay"></div>
           </div>
-          {/* ========================================================== */}
+          {/* ============================================================== */}
 
-          {/* Контент обернут в relative z-10, чтобы быть НАД фоном */}
+
           <div className="relative z-10 flex flex-col min-h-screen">
             <Header />
             <main className="pt-20 flex-grow"> 
@@ -82,7 +83,6 @@ export default async function RootLayout({
             <Footer />
           </div>
 
-          {/* Аналитика Vercel */}
           <Analytics />
 
         </NextIntlClientProvider>

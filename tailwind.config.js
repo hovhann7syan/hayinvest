@@ -1,48 +1,44 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
-      colors: {
-        obsidian: {
-          900: "#030304",
-          800: "#0A0A0B",
-          700: "#18181B",
-        },
-        primary: {
-          DEFAULT: "#8B5CF6",
-          glow: "#A78BFA",
-        }
-      },
-      fontFamily: {
-        sans: ["var(--font-montserrat)", "sans-serif"],
-        serif: ["var(--font-adelle)", "serif"],
-      },
       animation: {
-        'blob': 'blob 7s infinite',
-        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-        'marquee': 'marquee 30s linear infinite', // 👈 ДОБАВИЛИ ЭТО (скорость 30s)
+        // 👇 УСКОРИЛИ ВРЕМЯ (Меньше секунд = быстрее)
+        blob: "blob 4.5s infinite", // Было 7s
+        "blob-fast": "blob 3s infinite", // Было 4s (очень быстро)
+        "blob-slow": "blob 6s infinite", // Было 10s
       },
       keyframes: {
         blob: {
-          '0%': { transform: 'translate(0px, 0px) scale(1)' },
-          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-          '100%': { transform: 'translate(0px, 0px) scale(1)' },
+          "0%": {
+            transform: "translate(0px, 0px) scale(1)",
+          },
+          "33%": {
+            // 👇 УВЕЛИЧИЛИ РАЗМАХ (Летит дальше)
+            // Было 150px, стало 250px. Scale 1.5 (сильно раздувается)
+            transform: "translate(250px, -150px) scale(1.5)", 
+          },
+          "66%": {
+            // Было -120px, стало -200px.
+            transform: "translate(-200px, 150px) scale(0.8)", 
+          },
+          "100%": {
+            transform: "translate(0px, 0px) scale(1)",
+          },
         },
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        marquee: { // 👈 ДОБАВИЛИ ЭТО
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        }
-      }
+      },
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+      },
     },
   },
   plugins: [],

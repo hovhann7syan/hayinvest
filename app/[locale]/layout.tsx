@@ -4,7 +4,8 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Analytics } from "@vercel/analytics/react";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer"; 
+import Footer from "@/components/Footer";
+import Background from "@/components/Background"; // 👈 ИМПОРТ НОВОГО ФОНА
 import "../globals.css";
 
 // 1. ПОДКЛЮЧАЕМ MONTSERRAT
@@ -48,33 +49,19 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className="h-full">
-      <body className={`${montserrat.variable} ${adelle.variable} antialiased bg-[#050505] text-white font-sans flex flex-col min-h-screen selection:bg-purple-500/30 selection:text-purple-200`}>
+      {/* Я изменил bg-[#050505] на bg-[#020202], чтобы он совпадал 
+         с цветом нового компонента Background.
+      */}
+      <body className={`${montserrat.variable} ${adelle.variable} antialiased bg-[#020202] text-white font-sans flex flex-col min-h-screen selection:bg-purple-500/30 selection:text-purple-200`}>
+        
         <NextIntlClientProvider messages={messages} locale={locale}>
           
-          {/* ================= 🔥 ВОТ ЭТОТ БЛОК ТЫ ЗАБЫЛ 🔥 ================= */}
-          <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-            
-            {/* 1. Сетка */}
-            <div className="absolute inset-0 opacity-[0.1]" 
-                 style={{ 
-                   backgroundImage: 'linear-gradient(#222 1px, transparent 1px), linear-gradient(90deg, #222 1px, transparent 1px)', 
-                   backgroundSize: '40px 40px' 
-                 }}>
-            </div>
-            
-            {/* 2. Сами СФЕРЫ (которые используют твой CSS) */}
-            <div className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] bg-purple-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob"></div>
-            
-            <div className="absolute -bottom-[20%] -right-[10%] w-[70vw] h-[70vw] bg-green-600/10 rounded-full mix-blend-screen filter blur-[120px] opacity-40 animate-blob animation-delay-2000"></div>
-            
-            <div className="absolute top-[30%] left-[40%] w-[50vw] h-[50vw] bg-indigo-600/10 rounded-full mix-blend-screen filter blur-[150px] opacity-30 animate-blob animation-delay-4000 hidden md:block"></div>
+          {/* 👇 НОВЫЙ ФОН */}
+          {/* Мы вставили его сюда. Старый блок с 'fixed inset-0... opacity-...' удален. */}
+          <Background />
 
-            {/* 3. Шум */}
-            <div className="fixed inset-0 opacity-[0.04] bg-noise mix-blend-overlay"></div>
-          </div>
-          {/* ============================================================== */}
-
-
+          {/* 👇 КОНТЕНТ */}
+          {/* relative z-10 гарантирует, что сайт будет ПОВЕРХ фона */}
           <div className="relative z-10 flex flex-col min-h-screen">
             <Header />
             <main className="pt-20 flex-grow"> 
